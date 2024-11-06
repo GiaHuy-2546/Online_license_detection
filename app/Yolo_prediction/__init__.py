@@ -11,15 +11,16 @@ import xml.etree.ElementTree as xet
 from glob import glob
 from skimage import io
 from shutil import copy
-from tensorflow.keras.models import Model
-from tensorflow.keras.callbacks import TensorBoard
+# from tensorflow.keras.models import Model
+# from tensorflow.keras.callbacks import TensorBoard
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.applications import InceptionResNetV2
-from tensorflow.keras.layers import Dense, Dropout, Flatten, Input
-from tensorflow.keras.preprocessing.image import load_img, img_to_array
+# from tensorflow.keras.applications import InceptionResNetV2
+# from tensorflow.keras.layers import Dense, Dropout, Flatten, Input
+# from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
 folder_out = os.path.dirname(__file__)
-folder_Project = os.path.dirname(folder_out)
+folder_app = os.path.dirname(folder_out)
+folder_Project = os.path.dirname(folder_app)
 
 # settings
 INPUT_WIDTH =  640
@@ -123,7 +124,7 @@ def non_maximum_supression(input_image,detections):
 
 def save_text(filename, text):
     name, ext = os.path.splitext(filename)
-    with open('{}\static\predict/{}.txt'.format(folder_Project, name), mode='w') as f:
+    with open('{}\static\predict/{}.txt'.format(folder_app, name), mode='w') as f:
         f.write(text)
     f.close()
 
@@ -177,14 +178,14 @@ def drawings(image,boxes_np,confidences_np,index, filename):
         
         image_bgr = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         cv2.imwrite(
-        '{}\static\predict/{}'.format(folder_Project, filename), image_bgr)
+        '{}\static\predict/{}'.format(folder_app, filename), image_bgr)
         
         ymax = y + h
         xmax = x + w
         roi = image[y:ymax, x:xmax]
         roi_bgr = cv2.cvtColor(roi, cv2.COLOR_RGB2BGR)
         cv2.imwrite(
-        '{}\static/roi/{}'.format(folder_Project, filename), roi_bgr)
+        '{}\static/roi/{}'.format(folder_app, filename), roi_bgr)
         
         
         gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
@@ -213,20 +214,3 @@ def detect_license_plate(pathsave, filename):
     text = yolo_predictions(img,net, filename)
     return text
     
-    
-    # fig = px.imshow(results)
-    # fig.update_layout(width=700, height=500, margin=dict(l=10, r=10, b=10, t=10))
-    # fig.update_xaxes(showticklabels=False).update_yaxes(showticklabels=False)
-    # fig.show()
-    
-    
-# pathsave = input()
-# detect_license_plate(pathsave, 'a.jpg')
-
-# import cv2
-# img = cv2.imread('yolov5/data_images/test/N98.jpeg')
-# results = yolo_predictions(img,net)
-
-# test
-# img = io.imread('yolov5/data_images/test/N8.jpeg')
-# results = yolo_predictions(img,net)
