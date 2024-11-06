@@ -1,11 +1,4 @@
 Flask
 gunicorn
 opencv-python
-pandas
-tensorflow
-pytesseract
-plotly.express
-matplotlib
 skimage
-shutil
-sklearn.model_selection
