@@ -19,8 +19,7 @@ from skimage import io
 # from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
 folder_out = os.path.dirname(__file__)
-folder_app = os.path.dirname(folder_out)
-folder_Project = os.path.dirname(folder_app)
+folder_Project = os.path.dirname(folder_out)
 
 # settings
 INPUT_WIDTH =  640
@@ -124,7 +123,7 @@ def non_maximum_supression(input_image,detections):
 
 def save_text(filename, text):
     name, ext = os.path.splitext(filename)
-    with open('{}\static\predict/{}.txt'.format(folder_app, name), mode='w') as f:
+    with open('{}/app\static\predict/{}.txt'.format(folder_app, name), mode='w') as f:
         f.write(text)
     f.close()
 
@@ -178,14 +177,14 @@ def drawings(image,boxes_np,confidences_np,index, filename):
         
         image_bgr = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         cv2.imwrite(
-        '{}\static\predict/{}'.format(folder_app, filename), image_bgr)
+        '{}/app\static\predict/{}'.format(folder_app, filename), image_bgr)
         
         ymax = y + h
         xmax = x + w
         roi = image[y:ymax, x:xmax]
         roi_bgr = cv2.cvtColor(roi, cv2.COLOR_RGB2BGR)
         cv2.imwrite(
-        '{}\static/roi/{}'.format(folder_app, filename), roi_bgr)
+        '{}/app\static/roi/{}'.format(folder_app, filename), roi_bgr)
         
         
         gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
