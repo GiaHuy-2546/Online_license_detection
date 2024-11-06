@@ -6,7 +6,6 @@ tensorflow
 pytesseract
 plotly.express
 matplotlib
-xml.etree.ElementTree
 glob
 skimage
 shutil
