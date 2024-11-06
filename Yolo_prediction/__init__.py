@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 # import pandas as pd
 # import tensorflow as tf
-# import pytesseract as pt
+import pytesseract as pt
 # import plotly.express as px
 # import matplotlib.pyplot as plt
 # import xml.etree.ElementTree as xet
