@@ -6,7 +6,6 @@ tensorflow
 pytesseract
 plotly.express
 matplotlib
-glob
 skimage
 shutil
 sklearn.model_selection
