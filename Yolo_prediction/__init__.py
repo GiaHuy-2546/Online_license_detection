@@ -18,8 +18,8 @@ from tensorflow.keras.applications import InceptionResNetV2
 from tensorflow.keras.layers import Dense, Dropout, Flatten, Input
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
-folder_WebbApp2 = os.path.dirname(__file__)
-folder_Project = os.path.dirname(folder_WebbApp2)
+folder_out = os.path.dirname(__file__)
+folder_Project = os.path.dirname(folder_out)
 
 # settings
 INPUT_WIDTH =  640
@@ -123,7 +123,7 @@ def non_maximum_supression(input_image,detections):
 
 def save_text(filename, text):
     name, ext = os.path.splitext(filename)
-    with open('{}\WebbApp\static\predict/{}.txt'.format(folder_Project, name), mode='w') as f:
+    with open('{}\static\predict/{}.txt'.format(folder_Project, name), mode='w') as f:
         f.write(text)
     f.close()
 
@@ -177,14 +177,14 @@ def drawings(image,boxes_np,confidences_np,index, filename):
         
         image_bgr = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         cv2.imwrite(
-        '{}\WebbApp\static\predict/{}'.format(folder_Project, filename), image_bgr)
+        '{}\static\predict/{}'.format(folder_Project, filename), image_bgr)
         
         ymax = y + h
         xmax = x + w
         roi = image[y:ymax, x:xmax]
         roi_bgr = cv2.cvtColor(roi, cv2.COLOR_RGB2BGR)
         cv2.imwrite(
-        '{}\WebbApp\static/roi/{}'.format(folder_Project, filename), roi_bgr)
+        '{}\static/roi/{}'.format(folder_Project, filename), roi_bgr)
         
         
         gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
