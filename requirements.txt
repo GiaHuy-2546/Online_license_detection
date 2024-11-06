@@ -5,7 +5,7 @@ pandas
 tensorflow
 pytesseract
 plotly.express
-matplotlib.pyplot
+matplotlib
 xml.etree.ElementTree
 glob
 skimage
