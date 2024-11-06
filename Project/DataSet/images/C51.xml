@@ -1,0 +1,26 @@
+<annotation>
+	<folder>da_loc</folder>
+	<filename>C51.jpg</filename>
+	<path>D:\Now\GT_nganh_TTNT\Project1\Data\da_loc\C51.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>400</width>
+		<height>300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>lisence</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>118</xmin>
+			<ymin>87</ymin>
+			<xmax>240</xmax>
+			<ymax>194</ymax>
+		</bndbox>
+	</object>
+</annotation>
