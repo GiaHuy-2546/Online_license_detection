@@ -187,12 +187,12 @@ def drawings(image,boxes_np,confidences_np,index, filename):
         '{}/app\static/roi/{}'.format(folder_Project, filename), roi_bgr)
         
         
-        gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
-        magic_color = apply_brightness_contrast(gray, brightness=40, contrast=70)
-        text = pt.image_to_string(magic_color, lang='eng', config='--psm 6')
-        save_text(filename, text)
+        # gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
+        # magic_color = apply_brightness_contrast(gray, brightness=40, contrast=70)
+        # text = pt.image_to_string(magic_color, lang='eng', config='--psm 6')
+        # save_text(filename, text)
         
-    return text
+    return 'Coming-Soon'
 #### -> Trả ra file ảnh sau khi vẽ và vẽ lên hình luôn
 
 
