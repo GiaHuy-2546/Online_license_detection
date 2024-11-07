@@ -169,14 +169,14 @@ def drawings(image,boxes_np,confidences_np,index):
         
         ##########################
         
-        image_bgr = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+        # image_bgr = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         # cv2.imwrite(
         # '{}/app\static\predict/{}'.format(folder_Project, filename), image_bgr)
         
         ymax = y + h
         xmax = x + w
         roi = image[y:ymax, x:xmax]
-        roi_bgr = cv2.cvtColor(roi, cv2.COLOR_RGB2BGR)
+        # roi_bgr = cv2.cvtColor(roi, cv2.COLOR_RGB2BGR)
         # cv2.imwrite(
         # '{}/app\static/roi/{}'.format(folder_Project, filename), roi_bgr)
         
@@ -186,7 +186,7 @@ def drawings(image,boxes_np,confidences_np,index):
         # text = pt.image_to_string(magic_color, lang='eng', config='--psm 6')
         # save_text(filename, text)
         
-    return image_bgr, roi_bgr
+    return image, roi
 #### -> Trả ra file ảnh sau khi vẽ và vẽ lên hình luôn
 
 
