@@ -47,7 +47,7 @@ def index():
         path_save = os.path.join(UPLOAD_PATH3, filename_roi)
         roi.save(path_save)
 
-        return render_template('index.html', upload=True, upload_image=filename, text='COMING SOON')
+        return render_template('index.html', upload=True, upload_image=filename, duong_dan=BASE_PATH, text='COMING SOON')
 
     return render_template('index.html', upload=False)
 
