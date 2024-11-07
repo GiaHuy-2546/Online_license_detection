@@ -8,13 +8,15 @@ from werkzeug.datastructures import FileStorage
 # webserver gateway interface
 app = Flask(__name__)
 
-# BASE_PATH = os.path.dirname(__file__)
+BASE_PATH = os.path.dirname(__file__)
 # UPLOAD_PATH = BASE_PATH + 'static/upload'
-UPLOAD_FOLDER = 'static/upload'
-PREDICT_FOLDER = 'static/predict'
-ROI_FOLDER = 'static/roi'
+UPLOAD_FOLDER = BASE_PATH + 'static/upload'
+PREDICT_FOLDER = BASE_PATH + 'static/predict'
+ROI_FOLDER = BASE_PATH + 'static/roi'
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['PREDICT_FOLDER'] = PREDICT_FOLDER
+app.config['ROI_FOLDER'] = ROI_FOLDER
 
 def Chuyen_doi_anh(image_bgr):
     _, image_encoded = cv2.imencode('.jpg', image_bgr)  # Mã hóa ảnh thành JPEG
@@ -46,11 +48,11 @@ def index():
             os.makedirs(PREDICT_FOLDER)
         if not os.path.exists(ROI_FOLDER):
             os.makedirs(ROI_FOLDER)
-        predict_path = os.path.join(PREDICT_FOLDER, upload_file.filename)
-        roi_path = os.path.join(ROI_FOLDER, upload_file.filename)
-        
+            
+        predict_path = os.path.join(app.config['PREDICT_FOLDER'], upload_file.filename)
         cv2.imwrite(predict_path, image)
         
+        roi_path = os.path.join(app.config['ROI_FOLDER'], upload_file.filename)
         cv2.imwrite(roi_path, roi)
         
         # filename_image = image.filename
