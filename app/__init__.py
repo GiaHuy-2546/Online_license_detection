@@ -33,6 +33,8 @@ def index():
         # if not os.path.exists(UPLOAD_PATH):
         #     os.makedirs(UPLOAD_PATH)
         upload_file = request.files['image_name']
+        if not os.path.exists(UPLOAD_FOLDER):
+            os.makedirs(UPLOAD_FOLDER)
         image_path = os.path.join(app.config['UPLOAD_FOLDER'], upload_file.filename)
         upload_file.save(image_path)
         # filename = upload_file.filename
@@ -40,6 +42,10 @@ def index():
         # upload_file.save(path_save)
         image, roi = detect_license_plate(image_path)
         
+        if not os.path.exists(PREDICT_FOLDER):
+            os.makedirs(PREDICT_FOLDER)
+        if not os.path.exists(ROI_FOLDER):
+            os.makedirs(ROI_FOLDER)
         predict_path = os.path.join(PREDICT_FOLDER, upload_file.filename)
         roi_path = os.path.join(ROI_FOLDER, upload_file.filename)
         
