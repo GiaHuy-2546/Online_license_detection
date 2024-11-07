@@ -18,6 +18,25 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['PREDICT_FOLDER'] = PREDICT_FOLDER
 app.config['ROI_FOLDER'] = ROI_FOLDER
 
+folders = [app.config['UPLOAD_FOLDER'], app.config['PREDICT_FOLDER'], app.config['ROI_FOLDER']]
+for folder in folders:
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
+#################
+
+try:
+    # Tạo một tệp mẫu trong thư mục static để kiểm tra quyền ghi
+    test_path = os.path.join('static', 'test_write_permission.txt')
+    with open(test_path, 'w') as f:
+        f.write("Kiểm tra quyền ghi vào thư mục static.")
+    print("Tạo tệp thành công. Quyền ghi hợp lệ.")
+    
+    # Xóa tệp mẫu sau khi kiểm tra xong (tùy chọn)
+    os.remove(test_path)
+except IOError:
+    print("Lỗi: Tài khoản ứng dụng không có quyền ghi vào thư mục static.")
+
 def Chuyen_doi_anh(image_bgr):
     _, image_encoded = cv2.imencode('.jpg', image_bgr)  # Mã hóa ảnh thành JPEG
     image_bytes = BytesIO(image_encoded.tobytes())
@@ -35,8 +54,7 @@ def index():
         # if not os.path.exists(UPLOAD_PATH):
         #     os.makedirs(UPLOAD_PATH)
         upload_file = request.files['image_name']
-        if not os.path.exists(UPLOAD_FOLDER):
-            os.makedirs(UPLOAD_FOLDER)
+
         image_path = os.path.join(app.config['UPLOAD_FOLDER'], upload_file.filename)
         upload_file.save(image_path)
         # filename = upload_file.filename
@@ -44,11 +62,6 @@ def index():
         # upload_file.save(path_save)
         image, roi = detect_license_plate(image_path)
         
-        if not os.path.exists(PREDICT_FOLDER):
-            os.makedirs(PREDICT_FOLDER)
-        if not os.path.exists(ROI_FOLDER):
-            os.makedirs(ROI_FOLDER)
-            
         predict_path = os.path.join(app.config['PREDICT_FOLDER'], upload_file.filename)
         cv2.imwrite(predict_path, image)
         
@@ -69,9 +82,9 @@ def index():
 
     return render_template('index.html', upload=False)
 
-@app.route('/static/<folder>/<filename>')
-def serve_image(folder, filename):
-    return send_from_directory(os.path.join(app.root_path, 'app/static', folder), filename)
+# @app.route('/static/<folder>/<filename>')
+# def serve_image(folder, filename):
+#     return send_from_directory(os.path.join(app.root_path, 'app/static', folder), filename)
 
 
 if __name__ == "__main__":
