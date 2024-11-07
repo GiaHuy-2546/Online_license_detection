@@ -176,15 +176,15 @@ def drawings(image,boxes_np,confidences_np,index, filename):
         ##########################
         
         image_bgr = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-        cv2.imwrite(
-        '{}/app\static\predict/{}'.format(folder_Project, filename), image_bgr)
+        # cv2.imwrite(
+        # '{}/app\static\predict/{}'.format(folder_Project, filename), image_bgr)
         
         ymax = y + h
         xmax = x + w
         roi = image[y:ymax, x:xmax]
         roi_bgr = cv2.cvtColor(roi, cv2.COLOR_RGB2BGR)
-        cv2.imwrite(
-        '{}/app\static/roi/{}'.format(folder_Project, filename), roi_bgr)
+        # cv2.imwrite(
+        # '{}/app\static/roi/{}'.format(folder_Project, filename), roi_bgr)
         
         
         # gray = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2GRAY)
@@ -192,7 +192,7 @@ def drawings(image,boxes_np,confidences_np,index, filename):
         # text = pt.image_to_string(magic_color, lang='eng', config='--psm 6')
         # save_text(filename, text)
         
-    return 'Coming-Soon'
+    return image_bgr, roi_bgr
 #### -> Trả ra file ảnh sau khi vẽ và vẽ lên hình luôn
 
 
@@ -203,13 +203,13 @@ def yolo_predictions(img,net, filename):
     # step-2: NMS
     boxes_np, confidences_np, index = non_maximum_supression(input_image, detections)
     # step-3: Drawings
-    text = drawings(img,boxes_np,confidences_np,index, filename)
-    return text
+    image, roi = drawings(img,boxes_np,confidences_np,index, filename)
+    return image, roi
 
 
 def detect_license_plate(pathsave, filename):
     img = io.imread(pathsave)
     img = cv2.cvtColor(img, cv2.COLOR_RGBA2RGB)
-    text = yolo_predictions(img,net, filename)
-    return text
+    image, roi = yolo_predictions(img,net, filename)
+    return image, roi
     
