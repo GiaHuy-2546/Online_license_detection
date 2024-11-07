@@ -1,10 +1,7 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request
 import os
 from Yolo_prediction import detect_license_plate
 import cv2
-import numpy as np
-from io import BytesIO
-from werkzeug.datastructures import FileStorage
 # webserver gateway interface
 app = Flask(__name__)
 
