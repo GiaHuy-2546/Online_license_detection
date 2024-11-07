@@ -10,6 +10,13 @@ UPLOAD_PATH = BASE_PATH + '/static/upload'
 PREDICT_PATH = BASE_PATH + '/static/predict'
 ROI_PATH = BASE_PATH + '/static/roi'
 
+if not os.path.exists(UPLOAD_PATH):
+    os.makedirs(UPLOAD_PATH)
+if not os.path.exists(PREDICT_PATH):
+    os.makedirs(PREDICT_PATH)
+if not os.path.exists(ROI_PATH):
+    os.makedirs(ROI_PATH)
+
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
