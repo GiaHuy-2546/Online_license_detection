@@ -12,7 +12,7 @@ BASE_PATH = os.path.dirname(__file__)
 UPLOAD_PATH = BASE_PATH + 'static/upload'
 
 def Chuyen_doi_anh(image_bgr):
-    image_encoded = cv2.imencode('.jpg', image_bgr)  # Mã hóa ảnh thành JPEG
+    _, image_encoded = cv2.imencode('.jpg', image_bgr)  # Mã hóa ảnh thành JPEG
     image_bytes = BytesIO(image_encoded.tobytes())
     file_storage = FileStorage(
     stream=image_bytes,
