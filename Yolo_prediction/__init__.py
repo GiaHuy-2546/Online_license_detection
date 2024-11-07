@@ -10,13 +10,7 @@ import numpy as np
 
 # from glob import glob
 from skimage import io
-# from shutil import copy
-# from tensorflow.keras.models import Model
-# from tensorflow.keras.callbacks import TensorBoard
-# from sklearn.model_selection import train_test_split
-# from tensorflow.keras.applications import InceptionResNetV2
-# from tensorflow.keras.layers import Dense, Dropout, Flatten, Input
-# from tensorflow.keras.preprocessing.image import load_img, img_to_array
+
 
 folder_out = os.path.dirname(__file__)
 folder_Project = os.path.dirname(folder_out)
