@@ -10,8 +10,8 @@ app = Flask(__name__)
 
 BASE_PATH = os.path.dirname(__file__)
 UPLOAD_PATH = BASE_PATH + '/static/upload'
-PREDICT_PATH = BASE_PATH + '/static/upload'
-ROI_PATH = BASE_PATH + '/static/upload'
+PREDICT_PATH = BASE_PATH + '/static/predict'
+ROI_PATH = BASE_PATH + '/static/roi'
 
 
 @app.route('/', methods=['POST', 'GET'])
