@@ -5,7 +5,7 @@ from Yolo_prediction import detect_license_plate
 app = Flask(__name__)
 
 BASE_PATH = os.path.dirname(__file__)
-UPLOAD_PATH = BASE_PATH + '/static/upload'
+UPLOAD_PATH = BASE_PATH + 'web/app/static/upload'
 
 
 @app.route('/', methods=['POST', 'GET'])
