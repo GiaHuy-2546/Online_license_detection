@@ -13,18 +13,24 @@ def index():
     if request.method == 'POST':
         BASE_PATH = os.path.dirname(__file__)
         UPLOAD_PATH = BASE_PATH + 'static/upload'
+        if not os.path.exists(UPLOAD_PATH):
+            os.makedirs(UPLOAD_PATH)
         upload_file = request.files['image_name']
         filename = upload_file.filename
         path_save = os.path.join(UPLOAD_PATH, filename)
         upload_file.save(path_save)
         image, roi = detect_license_plate(path_save, filename)
-        UPLOAD_PATH = BASE_PATH + 'static/predict'
+        UPLOAD_PATH2 = BASE_PATH + 'static/predict'
+        if not os.path.exists(UPLOAD_PATH2):
+            os.makedirs(UPLOAD_PATH2)
         filename_image = image.filename
-        path_save = os.path.join(UPLOAD_PATH, filename_image)
+        path_save = os.path.join(UPLOAD_PATH2, filename_image)
         image.save(path_save)
-        UPLOAD_PATH = BASE_PATH + 'static/roi'
+        UPLOAD_PATH3 = BASE_PATH + 'static/roi'
+        if not os.path.exists(UPLOAD_PATH3):
+            os.makedirs(UPLOAD_PATH3)
         filename_roi = roi.filename
-        path_save = os.path.join(UPLOAD_PATH, filename_roi)
+        path_save = os.path.join(UPLOAD_PATH3, filename_roi)
         roi.save(path_save)
 
         return render_template('index.html', upload=True, upload_image=filename, text='COMING SOON')
