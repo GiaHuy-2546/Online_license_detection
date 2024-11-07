@@ -147,7 +147,7 @@ def apply_brightness_contrast(input_img, brightness=0, contrast=0):
     return buf
 
 
-def drawings(image,boxes_np,confidences_np,index, filename):
+def drawings(image,boxes_np,confidences_np,index):
     # 5. Drawings
     for ind in index:
         x,y,w,h =  boxes_np[ind]
@@ -191,19 +191,19 @@ def drawings(image,boxes_np,confidences_np,index, filename):
 
 
 # predictions flow with return result
-def yolo_predictions(img,net, filename):
+def yolo_predictions(img,net):
     # step-1: detections
     input_image, detections = get_detections(img,net)
     # step-2: NMS
     boxes_np, confidences_np, index = non_maximum_supression(input_image, detections)
     # step-3: Drawings
-    image, roi = drawings(img,boxes_np,confidences_np,index, filename)
+    image, roi = drawings(img,boxes_np,confidences_np,index)
     return image, roi
 
 
-def detect_license_plate(pathsave, filename):
-    img = io.imread(pathsave)
+def detect_license_plate(pathsave):
+    img = cv2.imread(pathsave)
     img = cv2.cvtColor(img, cv2.COLOR_RGBA2RGB)
-    image, roi = yolo_predictions(img,net, filename)
+    image, roi = yolo_predictions(img,net)
     return image, roi
     
