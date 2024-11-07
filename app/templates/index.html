@@ -17,14 +17,14 @@
       <td>
         <img
           class="rounded float-left img-fluid"
-          src="{{ url_for('static', filename='upload/' + upload_image) }}"
+          src="/static/upload/{{upload_image}}"
           alt=""
         />
       </td>
       <td>
         <img
           class="rounded float-right img-fluid"
-          src="{{ url_for('static', filename='predict/' + upload_image) }}"
+          src="/static/predict/{{upload_image}}"
           alt=""
         />
       </td>
@@ -38,7 +38,7 @@
     </tr>
     <tr style="border: solid black">
       <td>
-        <img class="img-fluid" src="{{ url_for('static', filename='roi/' + upload_image) }}" alt="" />
+        <img class="img-fluid" src="/static/roi/{{ upload_image }}" alt="" />
       </td>
       <td style="background-color: #c1dce0">
         <h1 class="display-8">{{ text }}</h1>
