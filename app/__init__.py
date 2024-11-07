@@ -11,6 +11,8 @@ UPLOAD_PATH = BASE_PATH + 'web/app/static/upload'
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
+        BASE_PATH = os.path.dirname(__file__)
+        UPLOAD_PATH = BASE_PATH + 'web/app/static/upload'
         upload_file = request.files['image_name']
         filename = upload_file.filename
         path_save = os.path.join(UPLOAD_PATH, filename)
