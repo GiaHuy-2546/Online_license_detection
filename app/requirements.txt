@@ -3,3 +3,5 @@ gunicorn
 opencv-python
 scikit-image
 numpy
+pytesseract
+tesseract-ocr
