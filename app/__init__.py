@@ -18,33 +18,31 @@ if not os.path.exists(ROI_PATH):
     os.makedirs(ROI_PATH)
 
 
+def clear_folders():
+    # Danh sách các thư mục cần xóa ảnh
+    folders = ["static/upload", "static/predict", "static/roi"]
+    for folder in folders:
+        files = glob.glob(f"{BASE_PATH}/{folder}/*")  # Lấy tất cả file trong thư mục
+        for file in files:
+            try:
+                os.remove(file)  # Xóa từng file
+            except Exception as e:
+                print(f"Không thể xóa file {file}: {e}")
+
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
+        clear_folders()
         upload_file = request.files['image_name']
         filename = upload_file.filename
         path_save = os.path.join(UPLOAD_PATH, filename)
         upload_file.save(path_save)
+        plate_texts, roi_images = detect_license_plate(path_save, filename)
+        roi_with_texts = list(zip(roi_images, plate_texts))
 
-        # filename = upload_file.filename
-        # path_save = os.path.join(UPLOAD_PATH, filename)
-        # upload_file.save(path_save)
-        image, roi = detect_license_plate(path_save)
-        
-        predict_path = os.path.join(PREDICT_PATH, filename)
-        cv2.imwrite(predict_path, image)
-        
-        roi_path = os.path.join(ROI_PATH, filename)
-        cv2.imwrite(roi_path, roi)
-        
-
-        return render_template('index.html', upload=True, upload_image=filename, text='COMING SOON')
+        return render_template('index.html', upload=True, upload_image=filename, roi_with_texts = roi_with_texts)
 
     return render_template('index.html', upload=False)
-
-# @app.route('/static/<folder>/<filename>')
-# def serve_image(folder, filename):
-#     return send_from_directory(os.path.join(app.root_path, 'app/static', folder), filename)
 
 
 if __name__ == "__main__":
