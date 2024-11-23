@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
 import os
 from Yolo_prediction import detect_license_plate
-import cv2
+
+import glob
 # webserver gateway interface
 app = Flask(__name__)
 

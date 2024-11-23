@@ -2,7 +2,7 @@ import os
 import cv2
 import numpy as np
 import pytesseract as pt
-import glob
+
 from skimage import io
 
 #Trích ra các "đường dẫn tương đối" cần thiết:
