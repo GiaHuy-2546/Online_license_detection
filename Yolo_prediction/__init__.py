@@ -15,7 +15,7 @@ INPUT_HEIGHT = 640
 
 
 # LOAD YOLO MODEL - Load mô hình:
-net = cv2.dnn.readNetFromONNX(f'{folder_Project}\Model\weights/best.onnx')
+net = cv2.dnn.readNetFromONNX(f'{folder_Project}/Model/weights/best.onnx')
 net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
 net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 
