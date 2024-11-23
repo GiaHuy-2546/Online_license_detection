@@ -9,6 +9,20 @@
   </form>
 </div>
 
+<style>
+  .roi-img {
+    width: auto;
+    height: 100px;
+    max-width: 100%;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    padding: 5px;
+    background-color: #f8f9fa;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+
 {% if upload %}
 <div class="container">
   <br />
@@ -31,18 +45,28 @@
     </tr>
   </table>
   <br />
-  <table style="border: solid black; width: 100%">
-    <tr style="border: solid black">
+  <table style="border: solid black; width: 100%" class="table table-bordered table-striped">
+    <tr style="border: solid black" class="text-center">
       <th>ẢNH SAU KHI CẮT</th>
       <th>BIỂN SỐ:</th>
     </tr>
     <tr style="border: solid black">
-      <td>
-        <img class="img-fluid" src="/static/roi/{{ upload_image }}" alt="" />
-      </td>
-      <td style="background-color: #c1dce0">
-        <h1 class="display-8">{{ text }}</h1>
-      </td>
+      
+      {# <img class="img-fluid" src="/static/roi/{{ upload_image }}" alt="" /> #}
+        
+      {% for roi_image, plate_text in roi_with_texts %}
+        <tr> 
+          <!-- Cột ảnh ROI -->
+          <td>
+            <img class="roi-img" class="text-center" src="/static/roi/{{ roi_image }}" alt="Ảnh {{ loop.index }}"/>
+          </td>
+          <!-- Cột biển số -->
+          <td style="background-color: #c1dce0; vertical-align: middle;">
+            <h5 class="text-center">{{ plate_text }}</h5>
+          </td>
+        </tr>
+      {% endfor %}
+      {#  #}
     </tr>
   </table>
 </div>
